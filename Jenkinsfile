@@ -1,6 +1,9 @@
-def imageName="192.168.44.44:8082/docker_registry/backend"
-def dockerRegistry="https://192.168.44.44:8082"
-def registryCredentials="artifactory"
+// def imageName="192.168.44.44:8082/docker_registry/backend"
+// def dockerRegistry="https://192.168.44.44:8082"
+// def registryCredentials="artifactory"
+def imageName="magaj/backend"
+def dockerRegistry=""
+def registryCredentials="docker_hub"
 def dockerTag=""
 
 pipeline {
