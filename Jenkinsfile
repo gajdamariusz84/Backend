@@ -3,7 +3,7 @@
 // def registryCredentials="artifactory"
 def imageName="magaj/backend"
 def dockerRegistry=""
-def registryCredentials="docker_hub"
+def registryCredentials="dockerhub"
 def dockerTag=""
 
 pipeline {
@@ -55,7 +55,25 @@ pipeline {
             }    
           }
         }
+    stage ('Push to repo') {
+        steps {
+            dir('ArgoCD') {
+                withCredentials([gitUsernamePassword(credentialsId: 'git', gitToolName: 'Default')]) {
+                    git branch: 'master', url: 'https://github.com/gajdamariusz84/ArgoCD'
+                    sh """ cd backend
+                    git config --global user.email "gajdamariusz84@gmail.com"
+                    git config --global user.name "Mariusz"
+                    sed -i "s#$imageName.*#$imageName:$dockerTag#g" backend_deploy.yaml
+                    git commit -am "Set new $dockerTag tag."
+                    git diff
+                    git push origin master
+                    """
+                }                  
+            } 
+        }
     }
+    }
+  
     post {
     	always {
     		junit testResults: "test-results/*.xml"
