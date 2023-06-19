@@ -3,7 +3,8 @@
 // def registryCredentials="artifactory"
 def imageName="magaj/backend"
 def dockerRegistry=""
-def registryCredentials="dockerhub"
+//def registryCredentials="dockerhub"
+def registryCredentials="a9822201-a3c5-4b75-941d-ebb012e4a58f"
 def dockerTag=""
 
 pipeline {
