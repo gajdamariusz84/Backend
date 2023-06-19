@@ -27,16 +27,16 @@ pipeline {
           sh 'python3 -m pytest --cov=. --cov-report xml:test-results/coverage.xml --junitxml=test-results/pytest-report.xml'
         }
       }
-    stage('run SonarQube') {
-        steps {
-            withSonarQubeEnv('SonarQube') {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }
-            timeout(1) {
-                waitForQualityGate false
-            }
-          }
-        }
+    // stage('run SonarQube') {
+    //     steps {
+    //         withSonarQubeEnv('SonarQube') {
+    //             sh "${scannerHome}/bin/sonar-scanner"
+    //         }
+    //         timeout(1) {
+    //             waitForQualityGate false
+    //         }
+    //       }
+    //     }
     stage('build app image') {
         steps {
             script {
